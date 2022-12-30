@@ -1,79 +1,56 @@
-package ss1;
+package section1;
 
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[]args){
-        System.out.println("Hello World");
-        int x = 10;
-        double y = 3.14;
-        String s = " Hello";
-        System.out.println(" x"+x);
-        y = y + 20 *x ;
-
-        if (y>100){
-            System.out.println("y="+y);
-
-        }else {
-            System.out.println("x="+x);
-        }
-
-        for (int i=0;i<10;i++){
-            System.out.println("i="+i);
-        }
-        //tinh S = 1 + 2 + 3 + ...+ 1000
-        int S= 0 ;
-        for (int i=1;i<1000;i++){
-            S = S + i ;
-
-        }
-        System.out.println("S="+S);
-        //tinh S = 1 + 1/2 + 1/3 + ...+ 1/1000
-        double S2 = 0;
-        for (int i = 1 ;i<1000;i++){
-            S2 = S2 + (double) 1/i;
-        }
-        System.out.println("S2="+S2);
-
-
-        int z = tinhTong(10,15);
-        int f = tinhHieu(25,10);
-        int g= tinhTich(5,6);
-        int h = tinhThuong(10,2);
-        System.out.println("z="+z);
-        System.out.println("f="+f);
-        System.out.println("g="+g);
-        System.out.println("h="+h);
-        boolean t = true;
-
-        //nhap 1 so nguyen tu ban phim
+public class BuoiMot {
+    public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Nhap 1 so nguyen:");
+        //Cau 1: Nhập 1 số nguyên n, kiểm tra nó có phải số hoàn hảo hay không
+        int s = 0;
+        System.out.println("Nhập vào 1 số nguyên: ");
         int n = sc.nextInt();
+        for(int i=1; i<=n-1; i++){
+            if(n%i==0){
+                s+=i;
+            }
+        }
+        if(s==n){
+            System.out.println(n+": là số hoàn hảo");
+        }else{
+            System.out.println(n+": không phải là số hoàn hảo");
+        }
+
+        //Cau 2: Nhập 1 số nguyên n, tìm số có vị trí thứ n của dãy Fibonaci
+        System.out.println("Nhập nào 1 số nguyên: ");
+        int n2 = sc.nextInt();
+        int s2 = Pibonaci(n2);
+        System.out.println("Số Pibonaci thứ n của "+n2 +" là "+s2);
 
 
-        System.out.println("Nhap 1 so thuc:");
-        double d = sc.nextDouble();
-        sc.nextLine();
-        System.out.println("nhap 1 string:");
-        String str = sc.nextLine();
-        System.out.println("n:"+n);
-        System.out.println("d:"+d);
-        System.out.println("str:"+str);
 
-
-
+        //Cau 3: Nhập 2 số nguyên, tìm ước chung lớn nhất và bội chung nhỏ nhất của 2 số đó
+        System.out.println("Nhập số nguyên thứ nhất: ");
+        int st1 = sc.nextInt();
+        System.out.println("Nhập số nguyên thứ hai: ");
+        int st2 = sc.nextInt();
+        System.out.println("Ước chung lớn nhất của " + st1 + " và " + st2 + " là: " + USCLN(st1, st2));
+        // tính BSCNN của a và b
+        System.out.println("Bội chung nhỏ nhất của " + st1 + " và " + st2 + " là: " + BSCNN(st1, st2));
     }
-    static int tinhTong(int a,int b){
-        return  a+b;
+
+    //Cau 2
+    static int Pibonaci(int n2){
+        int a = 1, b = 1;
+        if(n2==1 || n2==2)
+            return 1;
+        return Pibonaci(n2-1)+ Pibonaci(n2-2);
     }
-    static int tinhHieu(int a, int b){
-        return  a-b;
+    // Cau 3
+    public static int USCLN(int st1, int st2) {
+        if (st2 == 0) return st1;
+        return USCLN(st2, st1 % st2);
     }
-    static int tinhThuong(int a, int b){
-        return  b==0?null:a/b;
-    }
-    static int tinhTich(int a, int b){
-        return  a*b;
+    public static int BSCNN(int st1, int st2) {
+        return (st1 * st2) / USCLN(st1, st2);
     }
 }
